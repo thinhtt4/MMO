@@ -1,43 +1,38 @@
-import React, { useState } from 'react';
+
 import { Search, ShoppingCart, ChevronDown, Clock, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const MMOToolWebsite = () => {
-  const [searchHistory, setSearchHistory] = useState([
-    'IP dân cư Việt Nam',
-    'IP dân cư Việt Nam',
-    'IP dân cư Việt Nam'
-  ]);
 
   const products = [
     {
       id: 1,
       title: 'WW Proxy - IP dân cư Việt Nam',
       price: '1.000 đ -15.000 đ',
-      image: 'https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=400&h=300&fit=crop',
+      image: '/proxy.png',
       bgColor: 'bg-blue-700',
-      logo: 'WW'
+      logo: '/proxy.png'
     },
     {
       id: 2,
       title: 'Tải Khoản TikTok Nhiều Quốc Gia',
       price: '1.000 đ -15.000 đ',
-      image: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=400&h=300&fit=crop',
+      image: '/tiktok.png',
       bgColor: 'bg-gray-700',
-      logo: 'TikTok'
+      logo: '/tiktok.png'
     },
     {
       id: 3,
       title: 'Facebook Có 30-200 Bài Viết Năm 2023',
       price: '1.000 đ -15.000 đ',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=300&fit=crop',
+      image: '/facebook.png',
       bgColor: 'bg-blue-500',
-      logo: 'f'
+      logo: '/facebook.png'
     },
     {
       id: 4,
       title: 'Download tất cả video của kênh trên DOUYIN',
       price: '1.000 đ -15.000 đ',
-      image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=400&h=300&fit=crop',
+      image: '/douyin.png',
       bgColor: 'bg-yellow-400',
       badge: 'Download'
     }
@@ -93,9 +88,6 @@ const MMOToolWebsite = () => {
     }
   ];
 
-  const removeHistory = (index) => {
-    setSearchHistory(searchHistory.filter((_, i) => i !== index));
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
@@ -137,97 +129,132 @@ const MMOToolWebsite = () => {
       </header>
 
       {/* Hero Section with Search */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 opacity-60"></div>
-        <div className="relative max-w-7xl mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <div className="flex items-center space-x-4 mb-6">
-                <Search className="w-6 h-6 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Tìm kiếm"
-                  className="flex-1 outline-none text-lg"
-                />
-                <button className="bg-indigo-600 text-white px-8 py-3 rounded-xl hover:bg-indigo-700 font-medium">
-                  Tìm kiếm
-                </button>
-              </div>
-              
-              <div className="flex space-x-4 mb-6">
-                <select className="border rounded-lg px-4 py-2 text-gray-700">
-                  <option>Tùy chọn tìm kiếm</option>
-                </select>
-                <select className="border rounded-lg px-4 py-2 text-gray-700">
-                  <option>Tùy chọn cấp 2</option>
-                </select>
-                <select className="border rounded-lg px-4 py-2 text-gray-700">
-                  <option>Tùy chọn cấp 3</option>
-                </select>
-              </div>
+<section className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
+  {/* 1. Background Image */}
+  <img 
+    src="/bg_home.jpg" 
+    alt="Hero Background"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
+  
+  {/* 2. Lớp phủ để chữ và thanh search nổi bật hơn (tùy chọn) */}
+  <div className="absolute inset-0 bg-black/10"></div>
 
-              {searchHistory.length > 0 && (
-                <div className="space-y-2">
-                  {searchHistory.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between py-2 border-b">
-                      <div className="flex items-center space-x-3">
-                        <Clock className="w-5 h-5 text-gray-400" />
-                        <span className="text-gray-700">{item}</span>
-                      </div>
-                      <button onClick={() => removeHistory(index)}>
-                        <X className="w-5 h-5 text-gray-400 hover:text-gray-600" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
+  {/* 3. Container chứa thanh Search - Không có box trắng bọc ngoài */}
+  <div className="relative z-10 w-full px-4">
+    <div className="max-w-[886px] mx-auto">
+      
+      {/* Thanh tìm kiếm chính - Chiều cao cố định 48px theo Figma */}
+      <div className="flex items-center bg-white rounded-full p-1 shadow-lg h-[48px] border border-purple-200/50">
+        <div className="pl-4">
+          <Search className="w-5 h-5 text-gray-400" />
+        </div>
+        
+        <input
+          type="text"
+          placeholder="Tìm gian hàng hoặc người bán"
+          className="flex-1 bg-transparent outline-none px-3 text-[15px] text-gray-700 placeholder:text-gray-400"
+        />
+        
+        {/* Nút tìm kiếm bo tròn theo màu tím thương hiệu */}
+        <button className="bg-[#6366f1] hover:bg-[#5558e6] text-white h-full px-8 rounded-full text-sm font-medium transition-all">
+          Tìm kiếm
+        </button>
+      </div>
+
+      {/* Nếu bạn vẫn muốn giữ các Select Option, hãy đặt chúng ở dưới thanh Search một khoảng */}
+      <div className="flex justify-center space-x-4 mt-6">
+         {/* Các thẻ select của bạn ở đây nếu cần, hoặc xóa bỏ nếu muốn giống hệt ảnh */}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{/* Products Section */}
+<section className="max-w-7xl mx-auto px-4 py-12">
+  <div className="relative">
+    {/* Nút điều hướng */}
+    <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white rounded-full p-2 shadow-xl z-20 border border-gray-100 hover:scale-110 transition-transform">
+      <ChevronLeft className="w-6 h-6 text-gray-600" />
+    </button>
+    
+    {/* Grid Container */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {products.map((product) => (
+        <div 
+          key={product.id} 
+          className="bg-white rounded-[16px] border border-gray-200 shadow-sm overflow-hidden flex flex-col w-full max-w-[322px] min-h-[486px] mx-auto hover:shadow-md transition-shadow"
+        >
+          {/* 1. Khu vực hiển thị ảnh (Tỷ lệ Figma) */}
+          <div className="relative w-full aspect-square bg-gray-100">
+            {product.image ? (
+              <img 
+                src={product.image} 
+                alt={product.title}
+                className="w-full h-full object-cover" 
+              />
+            ) : (
+              /* Fallback nếu không có ảnh */
+              <div className={`${product.bgColor} w-full h-full flex items-center justify-center text-white text-4xl font-bold`}>
+                {product.logo}
+              </div>
+            )}
+
+            {/* Badge (Ví dụ: Ads) */}
+            {product.badge && (
+              <div className="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded text-[10px] font-bold uppercase">
+                {product.badge}
+              </div>
+            )}
+          </div>
+
+          {/* 2. Phần nội dung (Content) */}
+          <div className="p-4 flex flex-col flex-1">
+            {/* Tiêu đề: Figma dùng font-medium, khoảng 15px */}
+            <h3 className="text-[15px] font-medium text-gray-800 mb-2 line-clamp-2 leading-snug h-[42px]">
+              {product.title}
+            </h3>
+            
+            {/* Giá tiền: Màu tím chuẩn Figma #6366F1 */}
+            <div className="mt-auto">
+              <p className="text-[#6366f1] text-lg font-bold">
+                {product.price}
+              </p>
+              
+              {/* 3. Thông số phụ (Ratings/Sales) - Rất quan trọng để giống Figma */}
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-50 text-[11px] text-gray-400">
+                <span className="flex items-center text-yellow-500">
+                  ★ <span className="ml-1 text-gray-500">4.5</span>
+                </span>
+                <span>•</span>
+                <span>Đã bán: 136276</span>
+                <span>•</span>
+                <span>Khiếu nại: 0.0%</span>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
 
-      {/* Products Section */}
-      <section className="max-w-7xl mx-auto px-4 py-12">
-        <div className="relative">
-          <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-lg z-10">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className={`${product.bgColor} h-48 flex items-center justify-center relative`}>
-                  {product.badge && (
-                    <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-lg font-bold">
-                      {product.badge}
-                    </div>
-                  )}
-                  <div className="text-white text-4xl font-bold">
-                    {product.logo}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-medium text-gray-800 mb-2 h-12">{product.title}</h3>
-                  <p className="text-indigo-600 font-semibold">{product.price}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+    <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white rounded-full p-2 shadow-xl z-20 border border-gray-100 hover:scale-110 transition-transform">
+      <ChevronRight className="w-6 h-6 text-gray-600" />
+    </button>
+  </div>
+</section>
 
-          <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-lg z-10">
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-      </section>
-
-      {/* Purple Banner */}
-      <section className="bg-gradient-to-r from-purple-600 to-pink-500 py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center text-white">
-          <h2 className="text-3xl font-bold mb-2">Tạp hóa MMO</h2>
-          <p className="text-xl mb-1">Chuyên mua bán sản phẩm số</p>
-          <p className="text-lg">Phục vụ cộng đồng MMO</p>
-        </div>
-      </section>
+{/* Purple Banner Section */}
+<section className="w-full">
+  <div className="w-full aspect-[1440/293] relative overflow-hidden">
+    <img 
+      src="/ads.png"  
+      alt="Tạp hóa MMO Banner"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  </div>
+</section>
 
       {/* Services Grid */}
       <section className="max-w-7xl mx-auto px-4 py-12">
